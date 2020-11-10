@@ -139,7 +139,8 @@ private ILoanService loanService;
 	/* write the code to place the loan information */
 		HttpSession session=request.getSession();
 		LoanInfo loan = new LoanInfo();
-		String applicationNo= Integer.toString((Integer.parseInt(loanService.getLoanNo())+1));
+		String applicationNo=loanService.getLoanNo();
+		//String applicationNo= Integer.toString((Integer.parseInt(loanService.getLoanNo())+1));
 	    loan.setApplno(applicationNo);
 		loan.setAmtrequest(Double.parseDouble(request.getParameter("loanAmountRequested")));
 		loan.setPurpose(request.getParameter("loanName"));
@@ -236,43 +237,72 @@ private ILoanService loanService;
 	/* write a code to return to editloan page */
 		HttpSession session=request.getSession();
 		LoanInfo loan = new LoanInfo();
-		loan.setApplno(request.getParameter("applicationNo"));
-		loan.setUserId(session.getAttribute("userId").toString());
+		String appNo=request.getParameter("applicationNo");
+		String userid=session.getAttribute("userId").toString();
+		loan.setApplno(appNo);
+		loan.setUserId(userid);
 		loan=loanService.getLoanDetails(loan,session);
-		if(loan!=null)
-		{
-			request.setAttribute("message",true);
-			request.setAttribute("loan", loan);
-			return "editloanui.jsp";
-		}
-		else
-		{
-			request.setAttribute("messageIncorrectTrackId", true);
-			return "editloan.jsp";
-		}
+			if(loan!=null)
+			{
+				if(loanService.validateUser(userid,appNo))
+				{
+					if(!loanService.ifStatusApproved(loan))
+					{
+					request.setAttribute("message",true);
+					request.setAttribute("loan", loan);
+					return "editloanui.jsp";
+					}
+					else
+					{
+						request.setAttribute("nonEditable", true);
+						return "editloan.jsp";
+					}
+				}
+				else
+				{
+					request.setAttribute("invalidAppliNoForCurrentUser", true);
+					return "editloan.jsp";
+				}
+			}
+			else
+			{
+				request.setAttribute("messageIncorrectTrackId", true);
+				return "editloan.jsp";
+			}
 		
 		
-	}
+		}
 
 	private String trackloan(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 	/* write a code to return to trackloan page */
 		HttpSession session=request.getSession();
 		LoanInfo loan = new LoanInfo();
-		loan.setApplno(request.getParameter("applicationNo"));
-		loan.setUserId(session.getAttribute("userId").toString());
+		String appNo=request.getParameter("applicationNo");
+		String userid=session.getAttribute("userId").toString();
+		loan.setApplno(appNo);
+		loan.setUserId(userid);
 		loan=loanService.getLoanDetails(loan,session);
-		if(loan!=null)
-		{
-		request.setAttribute("message",true);
-		request.setAttribute("loan", loan);
-		return "loanDetails.jsp";
-		}
-		else
-		{
-			request.setAttribute("messageIncorrectTrackId", true);
-			return "trackloan.jsp";
-		}
+			if(loan!=null)
+			{
+				if(loanService.validateUser(userid,appNo))
+				{
+				request.setAttribute("message",true);
+				request.setAttribute("loan", loan);
+				return "loanDetails.jsp";
+				}
+				else
+				{
+					request.setAttribute("invalidAppliNoForCurrentUser", true);
+					return "trackloan.jsp";
+				}
+			}
+			else
+			{
+				request.setAttribute("messageIncorrectTrackId", true);
+				return "trackloan.jsp";
+			}
+		
 		
 		
 	}

@@ -14,6 +14,7 @@ public interface ILoanService {
 	
 	LoanInfo applyLoan(LoanInfo loan) throws LoanException;
 	String getLoanNo() throws LoanException;
+	LoanInfo getLoanDetailsAdmin(LoanInfo loan,HttpSession session);
 	LoanInfo getLoanDetails(LoanInfo loan,HttpSession session);
 	void updateLoan(LoanInfo loan) throws LoanException;
 	List<LoanInfo> listAll() throws LoanException, SQLException;
@@ -21,6 +22,8 @@ public interface ILoanService {
 	void sanctionLoan(ApprovedLoan sLoan) throws LoanException;
 	ApprovedLoan getProcessedLoanDetails(String applno) throws LoanException;
 	void updateRejectedLoan(String string) throws LoanException;
+	boolean validateUser(String userid, String appNo);
+	boolean ifStatusApproved(LoanInfo loan);
 
 
 }

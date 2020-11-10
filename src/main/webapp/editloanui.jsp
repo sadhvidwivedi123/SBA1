@@ -9,41 +9,11 @@
 </head>
 <body>
 
-<script>  
-function validateform(){  
-var loanName=document.editor.loanName.value;
-var address=document.editor.address.value;
-var phone=document.editor.phone.value;
-var email=document.editor.email.value;
-var loanAmountRequested=document.editor.loanAmountRequested.value;
-if(loanName.length>100){
-	  alert("Loan description length cannot be more than 100");  
-	  return false;  
-	  }
-if(address.length>200 || address.length<5){
-	  alert("Address length cannot be more than 200 and less than 5");  
-	  return false;  
-	  }
-if(phone.length!=10){
-	  alert("phone number length should be equal to 10 digits");  
-	  return false;  
-	  }
-if(email.length>50){
-	  alert("Email id length cannot be more than 50");  
-	  return false;  
-	  }
-if(loanAmountRequested.length<0){
-	  alert("Amount requested cannot be negative");  
-	  return false;  
-	  }
-}
-</script>
-
 <jsp:include page="header.jsp"/>
 <div align="right"><a href="logout">Logout</a></div>
 <div>
 	<h3>Edit Loan Details</h3>
-	<form action="editLoanProcess" method="post" name="editor" onsubmit="return validateform()">
+	<form action="editLoanProcess" method="post" name="editor" onsubmit="return validateEditLoanform()">
 	<table>
 	<tr><td>
 	
@@ -113,5 +83,6 @@ if(loanAmountRequested.length<0){
 	</form>
 	</div>
 <jsp:include page="footer.jsp"/>
+<script src="js/validateForm.js"></script>
 </body>
 </html>

@@ -1,42 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-        <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>User Registration</title>
+ <link rel="shortcut icon" href="#">
 </head>
 <body>
-<script>  
-function validateform(){  
-var loginId=document.register.loginId.value;  
-var password=document.register.password.value;  
-var mob=document.register.phone.value;
-var name=document.register.userName.value;
-var email=document.register.email.value;
-if(loginId.length<6){  
-	  alert("User ID must be at least 6 characters long. and unique, Please try again");  
-	  return false;  
-	  }  
-if(password.length<6){  
-  alert("Password must be at least 6 characters long.");  
-  return false;  
-  }  
-if(mob.length!=10){  
-	  alert("Phone no must have 10 digits");  
-	  return false;  
-	  }  
-if(email.length>50){  
-	  alert("Email length cannot be greater than 30");  
-	  return false;  
-	  }  
-if(loginId.length>20 || password.length>20 || name.length>30){  
-	  alert("LoginId, password, name length cannot be greater than 20");  
-	  return false;  
-	  }  
-}
-</script> 
+
 <jsp:include page="header.jsp"/>
 <hr/>
 <div align=center>
@@ -79,5 +50,6 @@ if(loginId.length>20 || password.length>20 || name.length>30){
 </div>
 
 <jsp:include page="footer.jsp"/>
+<script src="js/validateForm.js"></script>
 </body>
 </html>

@@ -16,7 +16,10 @@
 <h3 align="center">Track Loan Application</h3>
 <c:choose>
 	<c:when test = "${messageIncorrectTrackId}">
-	<p style="color:red"><strong>Incorrect Application No. Please try again</Strong></p>
+	<p style="color:red"><strong>This Application id does not exist. Please try again</Strong></p>
+	</c:when>
+	<c:when test = "${invalidAppliNoForCurrentUser}">
+	<p style="color:red"><strong>Invalid Application No. Please try again</Strong></p>
 	</c:when>
 </c:choose>
 <div align="center">

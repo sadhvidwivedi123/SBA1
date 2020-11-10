@@ -8,30 +8,7 @@
 <title>Loan Application Form</title>
 </head>
 <body onload="myFunction()">
-<script>  
-function validateform(){  
-var loanName=document.applier.loanName.value;
-var address=document.applier.address.value;
-var phone=document.applier.phone.value;
-var email=document.applier.email.value;
-if(loanName.length>100){
-	  alert("Loan description length cannot be more than 100");  
-	  return false;  
-	  }
-if(address.length>200 || address.length<5){
-	  alert("Address length cannot be more than 200 and less than 5");  
-	  return false;  
-	  }
-if(phone.length!=10){
-	  alert("phone number length should be equal to 10 digits");  
-	  return false;  
-	  }
-if(email.length>50){
-	  alert("Email id length cannot be more than 50");  
-	  return false;  
-	  }
-}
-</script>
+<script src="applicationFormValidation.js"></script>
 <!--
 	write the html code to accept laon info from user and send to placeloan servlet
 -->
@@ -39,7 +16,7 @@ if(email.length>50){
 <div align="right"><a href="logout">Logout</a></div>
 <h2 style="color:blue">eLoan Application</h2>
 <div>
-	<form action="placeloan" method="post" name="applier" onsubmit="return validateform()">
+	<form action="placeloan" method="post" name="applier" onsubmit="return validateApplicationForm()">
 		<div>
 			<div><strong><label for="loanName">Enter Loan Description</label></strong></div>
 			<div><input type="text" id="loanName" name="loanName" required > </div>
@@ -102,5 +79,7 @@ if(email.length>50){
 
 
 <jsp:include page="footer.jsp"/>
+<script src="js/validateForm.js"></script>
+
 </body>
 </html>

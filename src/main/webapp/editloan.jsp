@@ -16,7 +16,13 @@
 <h3 align="center">Edit Loan Application</h3>
 <c:choose>
 	<c:when test = "${messageIncorrectTrackId}">
-	<p style="color:red"><strong>Incorrect Application No. Please try again</Strong></p>
+	<p style="color:red" align="center"><strong>This Application id does not exist. Please try again</Strong></p>
+	</c:when>
+	<c:when test = "${nonEditable}">
+	<p style="color:red" align="center"><strong>This Application id cannot be edited as it is already processed. Please go to Track Loan link to track the status</Strong></p>
+	</c:when>
+	<c:when test = "${invalidAppliNoForCurrentUser}">
+	<p style="color:red" align="center"><strong>Invalid Application No. Please try again</Strong></p>
 	</c:when>
 </c:choose>
 <div align="center">
@@ -26,6 +32,7 @@
 			<div><button type="submit">Submit</button></div>
 </form>
 </div>
+<p style="color:blue" align="center"><strong>Note:</strong> Loan details cannot be edited if approved</p>
 <jsp:include page="footer.jsp"/>
 
 </body>

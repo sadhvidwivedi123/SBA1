@@ -39,28 +39,16 @@ table.center {
 	margin-right: auto;
 }
 </style>
-			<table class="center">
-				<thead>
-					<tr>
-						<th>Amount Sanctioned</th>
-						<th>Term of Loan</th>
-						<th>Payment Start Date</th>
-						<th>Loan Closure Date</th>
-						<th>Monthly Payment</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>${sanctionedAmt}</td>
-						<td>${termOfLoan}</td>
-						<td>${psd}</td>
-						<td>${lcd}</td>
-						<td>${String.format("%.2f",emi)}</td>
-					</tr>
-				</tbody>
-			</table>
-		</c:when>
-	</c:choose>
+<table class="center">
+<thead>
+<tr><th>Amount Sanctioned</th><th>Term of Loan</th><th>Payment Start Date</th><th>Loan Closure Date</th><th>Monthly Payment</th><th></th></tr>
+</thead>
+<tbody>
+<tr><td>${sanctionedAmt}</td><td>${termOfLoan}</td><td>${psd}</td><td>${lcd}</td><td>${String.format("%.2f",emi)}</td></tr>
+</tbody>
+</table>
+</c:when>
+</c:choose>
 	<br>
 	<a href="listall">List All</a>
 	<br>

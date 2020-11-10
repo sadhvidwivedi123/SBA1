@@ -28,7 +28,7 @@ public class AuthenticationFilter implements Filter {
 		HttpServletRequest httpReq=(HttpServletRequest)request;
 		HttpServletResponse httpResp=(HttpServletResponse)response;
 		boolean isAllowed=true;
-		if(!(httpReq.getServletPath().equals("/index.jsp"))&&!(httpReq.getServletPath().equals("/validate"))&&!(httpReq.getServletPath().equals("/register.jsp"))&&!(httpReq.getServletPath().equals("/registernewuser")))
+		if(!(httpReq.getServletPath().equals("/index.jsp"))&&!(httpReq.getServletPath().equals("/validate"))&&!(httpReq.getServletPath().equals("/register.jsp"))&&!(httpReq.getServletPath().equals("/registernewuser"))&&!((httpReq.getServletPath().contains("/validateForm.js"))))
 		{
 			if(httpReq.getSession().getAttribute("userId")==null)
 			{

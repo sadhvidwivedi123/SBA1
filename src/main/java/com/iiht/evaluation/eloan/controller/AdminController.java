@@ -168,9 +168,10 @@ HttpSession session=request.getSession();
 		HttpSession session=request.getSession();
 		LoanInfo loan = new LoanInfo();
 		ApprovedLoan aloan=new ApprovedLoan();
-		loan.setApplno(request.getParameter("applicationNo"));
+		String appNo=request.getParameter("applicationNo");
+		loan.setApplno(appNo);
 		loan.setUserId(session.getAttribute("userId").toString());
-		loan=loanService.getLoanDetails(loan,session);
+		loan=loanService.getLoanDetailsAdmin(loan,session);
 		
 		if(loan!=null)
 		{
@@ -183,14 +184,16 @@ HttpSession session=request.getSession();
 			
 		}
 		if(loan.getStatus().equals("approved")||loan.getStatus().equals("rejected"))
+		{
 		request.setAttribute("processed", true);
+		}
 		session.setAttribute("currentApplicationId", request.getParameter("applicationNo"));
 		return "calemi.jsp";
 		}
 		else
 		{
 		request.setAttribute("message",true);
-		session.setAttribute("currentApplicationId", request.getParameter("applicationNo"));
+		session.setAttribute("currentApplicationId", appNo);
 		return "process.jsp";
 		}
 		

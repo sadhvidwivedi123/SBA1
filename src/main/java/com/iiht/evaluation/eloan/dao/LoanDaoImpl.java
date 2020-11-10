@@ -175,6 +175,10 @@ public class LoanDaoImpl implements ILoanDao{
 				loan.setEmail(rs.getString(11));
 				loan.setStatus(rs.getString(12));
 			}
+			else
+			{
+				loan=null;
+			}
 		}
 		catch(SQLException exp)
 		{
@@ -191,7 +195,9 @@ public class LoanDaoImpl implements ILoanDao{
 				e.printStackTrace();
 			}
 		}
+		
 		return loan;
+		
 	}
 	@Override
 	public String getLoanUser(String applno) throws LoanException {

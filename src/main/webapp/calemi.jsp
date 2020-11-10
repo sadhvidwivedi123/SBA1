@@ -9,16 +9,6 @@
 <title>Sanction Loan</title>
 </head>
 <body>
-<script>  
-function validateform(){  
-var amountSactioned=document.sanctioner.amountSactioned.value;
-var rate=document.sanctioner.rate.value;
-if(amountSactioned>${String.format('%.2f',loan.getAmtrequest())}){
-	  alert("Sanction amount cannot be greater than the requested amount");  
-	  return false;  
-	  }
-}
-</script> 
  <!--
      Read the values from the admin servlet and cal emi and other details and send to
      to the same admin servlet to update the values in the database 
@@ -87,7 +77,7 @@ if(amountSactioned>${String.format('%.2f',loan.getAmtrequest())}){
 		</div>
 		<br>
 <hr>
-<form action="updatestatus" method="post" name="sanctioner" onsubmit="return validateform()">
+<form action="updatestatus" method="post" name="sanctioner" onsubmit="return validateCalEMIform(${String.format('%.2f',loan.getAmtrequest())})">
         <div>
 			<div><strong><label for="amountSactioned">loan Amount Sanctioned</label></strong></div>
 			<div><input type="number" step="any" id="amountSactioned" name="amountSactioned" value="${aloan.getAmotsanctioned() }" required></div>
@@ -119,5 +109,6 @@ if(amountSactioned>${String.format('%.2f',loan.getAmtrequest())}){
 		</div>
 </form>
 <jsp:include page="footer.jsp"/>
+<script src="js/validateForm.js"></script>
 </body>
 </html>

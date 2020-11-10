@@ -17,7 +17,7 @@
 <div align="center">
 <c:choose>
 	<c:when test = "${message}">
-	<p style="color:red">Unable to process the loan!!Application No: <Strong style="color:blue">"${applicationNo}"</Strong></p>
+	<p style="color:red">Loan Application No: <Strong style="color:blue">"${currentApplicationId}"</Strong> does not exist! </p>
 	</c:when>
 	</c:choose>
 <form action="process" method="post">

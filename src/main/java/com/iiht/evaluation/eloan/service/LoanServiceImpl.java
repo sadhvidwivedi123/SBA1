@@ -161,7 +161,7 @@ public class LoanServiceImpl implements ILoanService{
 	@Override
 	public String getLoanNo() throws LoanException {
 		
-		return loanDao.getLoanNo();
+		return Integer.toString((Integer.parseInt(loanDao.getLoanNo())+1));
 	}
 
 
@@ -169,38 +169,46 @@ public class LoanServiceImpl implements ILoanService{
 	public LoanInfo getLoanDetails(LoanInfo loan,HttpSession session) {
 		
 		try {
-			if(validateUser(loan))
-			{
+			
 			loan= loanDao.getLoanDetails(loan);
-			if(loan.getStatus().equals("pending")||session.getAttribute("userId").toString().equals("admin"))
-			{
-				return loan;
-			}
-			else
-			{
-				return null;
-				
-			}
-			}
-			else
-			{
-				return null;
-			}
+			return loan;
 		} catch (LoanException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
 	}
+public boolean ifStatusApproved(LoanInfo loan) {
+		
+	if(loan!=null)
+		return loan.getStatus().equals("approved");
+				return false;
+	}
 
+public LoanInfo getLoanDetailsAdmin(LoanInfo loan,HttpSession session) {
+		
+		try {
+			loan= loanDao.getLoanDetails(loan);
+			if(loan!=null)
+			{
+			
+			return loan;
+			}
+		} catch (LoanException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+		return null;
+	}
 
-	private boolean validateUser(LoanInfo loan) {
+	public boolean validateUser(String userid, String appNo) {
 		// TODO Auto-generated method stub
 		try {
-			String s=loanDao.getLoanUser(loan.getApplno());
+			String s=loanDao.getLoanUser(appNo);
 			if(!s.equals(""))
 			{
-				if(loan.getUserId().equals(s)||loan.getUserId().equals("admin"))
+				if(userid.equals(s))
 					return true;
 			}
 		} catch (LoanException e) {
@@ -269,4 +277,6 @@ public class LoanServiceImpl implements ILoanService{
 		loanDao.updateRejectedLoan(appNo);
 	}
 
+
+	
 }
